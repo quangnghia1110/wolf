@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ma Sói - Đêm</title>
+        <style>
+            /* Toàn bộ CSS */
+            body {
+                font-family: 'Arial', sans-serif;
+                background-color: #f9f9f9;
+                color: #333;
+                margin: 20px;
+                line-height: 1.6;
+            }
+
+            h1 {
+                text-align: center;
+                color: #2c3e50;
+                margin-bottom: 20px;
+            }
+
+            table {
+                width: 100%;
+                display: block;
+                overflow-x: auto;
+                border-collapse: collapse;
+                margin-bottom: 20px;
+                background-color: #fff;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+            }
+
+            table th, table td {
+                border: 1px solid #ddd;
+                padding: 12px;
+                text-align: center;
+                white-space: nowrap;
+            }
+
+            table th {
+                background-color: #2c3e50;
+                color: #fff;
+                text-transform: uppercase;
+                font-weight: bold;
+            }
+
+            table tbody tr:nth-child(even) {
+                background-color: #f4f6f8;
+            }
+
+            table tbody tr:hover {
+                background-color: #e1eaf0;
+            }
+
+            button {
+                display: block;
+                margin: 20px auto;
+                padding: 10px 20px;
+                font-size: 1em;
+                cursor: pointer;
+                border: none;
+                border-radius: 5px;
+                background-color: #3498db;
+                color: white;
+                transition: background-color 0.3s ease;
+            }
+
+            button:hover {
+                background-color: #2980b9;
+            }
+
+            select {
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 1em;
+                width: 100%;
+                max-width: 300px;
+                margin: 10px auto;
+                display: block;
+            }
+
+            select:hover {
+                background-color: #ecf0f1;
+                cursor: pointer;
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                table {
+                    font-size: 0.9em;
+                }
+
+                button {
+                    width: 100%;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Đêm <span id="night-number"></span></h1>
+
+        <table>
+            <thead>
+                <tr>
+
+                </tr>
+            </thead>
+            <tbody id="player-table">
+            </tbody>
+        </table>
+
+        <template id="role-options">
+            <option value>Chọn vai trò</option>
+            <option value="tientri">Tiên tri</option>
+            <option value="soiquy">Sói quỷ</option>
+            <option value="soitientri">Sói tiên tri</option>
+            <option value="masoi">Ma sói</option>
+            <option value="baove">Bảo vệ</option>
+            <option value="phuthuy">Phù thủy</option>
+            <option value="thosan">Thợ săn</option>
+            <option value="thantinhyeu">Thần tình yêu</option>
+            <option value="danlang">Dân làng</option>
+            <option value="thienthan">Thiên thần</option>
+        </template>
+
+        <button onclick="nextPhase()">Tiếp tục</button>
+
+        <script src="{{ url_for('static', filename='js/night.js') }}"></script>
+    </body>
+</html>

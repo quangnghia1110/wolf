@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ma Sói - Ngày</title>
+        <link rel="stylesheet"
+            href="{{ url_for('static', filename='css/style.css') }}">
+        <style>
+            /* Toàn bộ CSS */
+            body {
+                font-family: 'Arial', sans-serif;
+                background-color: #f9f9f9;
+                color: #333;
+                margin: 20px;
+                line-height: 1.6;
+            }
+
+            h1, h2 {
+                text-align: center;
+                color: #2c3e50;
+            }
+
+            h1 {
+                margin-bottom: 20px;
+            }
+
+            /* Bảng */
+            table {
+                width: 100%;
+                display: block;
+                overflow-x: auto;
+                border-collapse: collapse;
+                margin-bottom: 20px;
+                background-color: #fff;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+            }
+
+            table th, table td {
+                border: 1px solid #ddd;
+                padding: 12px;
+                text-align: center;
+                white-space: nowrap;
+            }
+
+            table th {
+                background-color: #2c3e50;
+                color: #fff;
+                text-transform: uppercase;
+                font-weight: bold;
+            }
+
+            table tbody tr:nth-child(even) {
+                background-color: #f4f6f8;
+            }
+
+            table tbody tr:hover {
+                background-color: #e1eaf0;
+            }
+
+            .dead-player td {
+                background-color: #ffe5e5 !important;
+                color: #c0392b;
+                font-style: italic;
+            }
+
+            .dead-player select {
+                background-color: #fbe3e3;
+                border-color: #c0392b;
+                color: #c0392b;
+            }
+
+            /* Bộ đếm thời gian */
+            .timer {
+                font-size: 2em;
+                font-weight: bold;
+                color: #27ae60;
+                text-align: center;
+                margin-top: 20px;
+            }
+
+            .phase-indicator {
+                font-size: 1.5em;
+                margin-top: 10px;
+                text-align: center;
+                color: #34495e;
+                font-weight: bold;
+            }
+
+            /* Nút */
+            button {
+                padding: 10px 20px;
+                font-size: 1em;
+                cursor: pointer;
+                border: none;
+                border-radius: 5px;
+                background-color: #3498db;
+                color: white;
+                transition: background-color 0.3s ease;
+                margin: 10px;
+            }
+
+            button:hover {
+                background-color: #2980b9;
+            }
+
+            #reset-button {
+                background-color: #e74c3c;
+                font-weight: bold;
+            }
+
+            #reset-button:hover {
+                background-color: #c0392b;
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .player-slot {
+                    flex-direction: column;
+                    align-items: stretch;
+                }
+
+                .player-slot input {
+                    margin-right: 0;
+                    margin-bottom: 10px;
+                }
+
+                button {
+                    width: 100%;
+                    margin-bottom: 10px;
+                }
+
+                table {
+                    font-size: 0.9em;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Ngày <span id="day-number"></span></h1>
+
+        <table>
+            <thead></thead>
+            <tbody id="player-table"></tbody>
+        </table>
+
+        <div id="phase-container">
+            <div class="timer" id="timer"></div>
+            <div class="time-config">
+                <label for="time-input-discussion">Thảo luận (giây):</label>
+                <input type="number" id="time-input-discussion"
+                    placeholder="1000" min="10" />
+                <button onclick="startDiscussionPhase()">Bắt đầu Thảo
+                    luận</button>
+            </div>
+            <div class="time-config" style="display: none;"
+                id="time-config-voting">
+                <label for="time-input-voting">Bỏ phiếu (giây):</label>
+                <input type="number" id="time-input-voting" placeholder="1000"
+                    min="10" />
+                <button onclick="startVotingPhase()">Bắt đầu Bỏ phiếu</button>
+            </div>
+            <div class="time-config" style="display: none;"
+                id="time-config-defense">
+                <label for="time-input-defense">Biện minh (giây):</label>
+                <input type="number" id="time-input-defense" placeholder="1000"
+                    min="10" />
+                <button onclick="startDefensePhase()">Bắt đầu Biện minh</button>
+            </div>
+            <div class="phase-indicator" id="phase">Thảo luận</div>
+        </div>
+
+        <div id="voting-container" style="display: none;">
+            <h2>Bỏ phiếu</h2>
+            <select id="vote-target">
+                <option value>Chọn người chơi</option>
+            </select>
+            <button onclick="submitVote()">Bỏ phiếu</button>
+        </div>
+
+        <div id="defense-container" style="display: none;">
+            <h2>Biện minh</h2>
+            <p>Người chơi đang biện minh: <span id="defense-player"></span></p>
+            <button onclick="handleDefense(true)">Sống</button>
+            <button onclick="handleDefense(false)">Chết</button>
+        </div>
+        <script src="{{ url_for('static', filename='js/day.js') }}"></script>
+    </body>
+</html>

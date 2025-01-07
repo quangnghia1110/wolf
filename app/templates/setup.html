@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ma Sói - Setup</title>
+        <style>
+            /* Toàn bộ CSS */
+            body {
+                font-family: 'Arial', sans-serif;
+                background-color: #f9f9f9;
+                color: #333;
+                margin: 20px;
+                line-height: 1.6;
+            }
+
+            h1 {
+                text-align: center;
+                color: #2c3e50;
+                margin-bottom: 20px;
+            }
+
+            #player-container {
+                max-width: 600px;
+                margin: 0 auto 20px;
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 8px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+
+            .player-slot {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 10px;
+                padding: 10px;
+                background-color: #f4f6f8;
+                border-radius: 5px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            }
+
+            .player-slot input {
+                flex: 1;
+                padding: 8px;
+                font-size: 1em;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                margin-right: 10px;
+            }
+
+            .player-slot button {
+                padding: 8px 12px;
+                font-size: 1em;
+                background-color: #e74c3c;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+            .player-slot button:hover {
+                background-color: #c0392b;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 1em;
+                cursor: pointer;
+                border: none;
+                border-radius: 5px;
+                background-color: #3498db;
+                color: white;
+                transition: background-color 0.3s ease;
+                display: block;
+                margin: 10px auto;
+            }
+
+            button:hover {
+                background-color: #2980b9;
+            }
+
+            #start-button {
+                background-color: #27ae60;
+            }
+
+            #start-button:hover {
+                background-color: #1e8449;
+            }
+
+            #player-count {
+                font-size: 1.2em;
+                margin-top: 20px;
+                color: #34495e;
+                text-align: center;
+            }
+
+            .error {
+                color: #e74c3c;
+                font-size: 0.9em;
+                margin-top: 10px;
+                text-align: center;
+                display: none;
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .player-slot {
+                    flex-direction: column;
+                    align-items: stretch;
+                }
+
+                .player-slot input {
+                    margin-right: 0;
+                    margin-bottom: 10px;
+                }
+
+                button {
+                    width: 100%;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Thiết lập người chơi</h1>
+
+        <div id="player-container">
+            <div class="player-slot">
+                <input type="text" placeholder="Tên người chơi 1" required>
+                <button onclick="removePlayer(this)">Xóa</button>
+            </div>
+        </div>
+
+        <button onclick="addPlayer()">Thêm người chơi</button>
+        <p id="player-count">Số người chơi: <span>1</span>/13</p>
+        <p class="error" id="error-message"></p>
+
+        <button onclick="startGame()" id="start-button">Bắt đầu trò
+            chơi</button>
+        <input type="hidden" id="game-phase" value="NIGHT1">
+
+        <script src="{{ url_for('static', filename='js/setup.js') }}"></script>
+    </body>
+</html>
