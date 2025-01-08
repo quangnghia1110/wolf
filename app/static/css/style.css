@@ -1,0 +1,369 @@
+.player-slot {
+    margin: 10px 0;
+    display: flex;
+    gap: 10px;
+}
+
+.error {
+    color: red;
+    margin: 10px 0;
+}
+
+textarea {
+    width: calc(100% - 20px);
+    max-width: 100%;
+    height: 100px;
+    border: 2px solid #d1d1d1;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 16px;
+    margin: 10px auto;
+    resize: none;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    outline: none;
+    transition: border-color 0.3s ease;
+    display: block;
+    box-sizing: border-box;
+}
+
+textarea:focus {
+    border-color: #3498db;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+.timer {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.phase-indicator {
+    color: blue;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+button {
+    padding: 5px 10px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+select {
+    padding: 5px;
+    margin: 2px;
+} 
+#reset-button {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 15px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#reset-button:hover {
+    background-color: darkred;
+}
+
+.dead-player {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.dead-player td {
+    background-color: #ffebee;
+    color: #b71c1c;
+}
+
+.dead-player select {
+    background-color: #ffebee;
+    color: #b71c1c;
+    border-color: #b71c1c;
+}
+
+.dead-player select:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Tổng thể */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 20px;
+    line-height: 1.6;
+}
+
+
+h1, h2 {
+    text-align: center;
+    color: #2c3e50;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+/* Container người chơi */
+#player-container {
+    max-width: 600px;
+    margin: 0 auto 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.player-slot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f4f6f8;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.player-slot input {
+    flex: 1;
+    padding: 8px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.player-slot button {
+    padding: 8px 12px;
+    font-size: 1em;
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.player-slot button:hover {
+    background-color: #c0392b;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: white;
+    transition: background-color 0.3s ease;
+    margin: 10px auto;
+    /* Căn giữa nút */
+    display: block;
+    /* Đảm bảo mỗi nút chiếm toàn bộ chiều ngang */
+    width: 100%;
+    /* Đặt chiều ngang cho nút */
+    max-width: 300px;
+    /* Giới hạn chiều rộng tối đa */
+    text-align: center;
+    /* Căn chữ ở giữa */
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+#start-button {
+    background-color: #27ae60;
+}
+
+#start-button:hover {
+    background-color: #1e8449;
+}
+
+#reset-button {
+    background-color: #e74c3c;
+}
+
+#reset-button:hover {
+    background-color: #c0392b;
+}
+
+#start-button {
+    background-color: #27ae60;
+}
+
+#start-button:hover {
+    background-color: #1e8449;
+}
+
+#skip-phase-button {
+    background-color: #e74c3c;
+}
+
+#skip-phase-button:hover {
+    background-color: #c0392b;
+}
+
+#player-count {
+    font-size: 1.2em;
+    margin-top: 20px;
+    color: #34495e;
+    text-align: center;
+}
+
+.error {
+    color: #e74c3c;
+    font-size: 0.9em;
+    margin-top: 10px;
+    display: none;
+        text-align: center;
+}
+
+/* Bảng */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+table th {
+    background-color: #2c3e50;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f4f6f8;
+}
+
+table tbody tr:hover {
+    background-color: #e1eaf0;
+}
+
+.dead-player td {
+    background-color: #ffe5e5 !important;
+    color: #c0392b;
+    font-style: italic;
+}
+
+.dead-player select {
+    background-color: #fbe3e3;
+    border-color: #c0392b;
+    color: #c0392b;
+}
+
+/* Dropdown (select) */
+select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    width: 100%;
+    max-width: 300px;
+    margin: 10px auto;
+    display: block;
+}
+
+select:hover {
+    background-color: #ecf0f1;
+    cursor: pointer;
+}
+
+/* Bộ đếm thời gian */
+.timer {
+    font-size: 2em;
+    font-weight: bold;
+    color: #27ae60;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.phase-indicator {
+    font-size: 1.5em;
+    margin-top: 10px;
+    text-align: center;
+    color: #34495e;
+    font-weight: bold;
+}
+
+/* Giai đoạn bỏ phiếu và biện minh */
+#voting-container, #defense-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    text-align: center;
+}
+
+#voting-container h2, #defense-container h2 {
+    color: #2c3e50;
+}
+
+#voting-container select, #defense-container button {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+#voting-container select:hover, #defense-container button:hover {
+    background-color: #ecf0f1;
+    cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .player-slot {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .player-slot input {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    table {
+        font-size: 0.9em;
+    }
+        textarea {
+            width: calc(100% - 20px);
+            font-size: 14px;
+        }
+}

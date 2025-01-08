@@ -1,65 +1,45 @@
-document.addEventListener('DOMContentLoaded', () => {
-    for(let i = 0; i < 12; i++) {
-        addPlayer();
-    }
-});
-
-function addPlayer() {
-    const container = document.getElementById('player-container');
-    const playerCount = container.children.length;
-    
-    if (playerCount >= 13) {
-        showError('Không thể thêm quá 13 người chơi!');
-        return;
-    }
-
-    const slot = document.createElement('div');
-    slot.className = 'player-slot';
-    slot.innerHTML = `
-        <input type="text" placeholder="Tên người chơi ${playerCount + 1}" required>
-        <button onclick="removePlayer(this)">Xóa</button>
-    `;
-    
-    container.appendChild(slot);
-    updatePlayerCount();
-}
-
-function removePlayer(button) {
-    const container = document.getElementById('player-container');
-    if (container.children.length <= 5) {
-        showError('Cần ít nhất 5 người chơi!');
-        return;
-    }
-    
-    button.parentElement.remove();
-    updatePlayerCount();
-}
 
 function updatePlayerCount() {
-    const count = document.getElementById('player-container').children.length;
-    document.querySelector('#player-count span').textContent = count;
+    const playerInput = document.getElementById('player-input');
+    const playerNames = getPlayerNames(playerInput.value);
+    document.querySelector('#player-count span').textContent = playerNames.length;
 }
 
 function showError(message) {
     const errorElement = document.getElementById('error-message');
-    errorElement.textContent = message;
-    setTimeout(() => {
-        errorElement.textContent = '';
-    }, 3000);
+    if (errorElement) {
+        errorElement.textContent = message; 
+        errorElement.style.display = 'block'; 
+        setTimeout(() => {
+            errorElement.textContent = '';
+            errorElement.style.display = 'none';
+        }, 3000);
+    } else {
+        console.error("Không tìm thấy phần tử 'error-message'.");
+    }
+}
+
+
+function getPlayerNames(input) {
+    return input
+        .split(/[, \n]+/) 
+        .map(name => name.trim()) 
+        .filter(name => name); 
 }
 
 async function startGame() {
-    const container = document.getElementById('player-container');
-    const players = [];
+    const playerInput = document.getElementById('player-input');
+    const players = getPlayerNames(playerInput.value);
     const gamePhase = document.getElementById('game-phase').value;
-    
-    for (let slot of container.children) {
-        const name = slot.querySelector('input').value.trim();
-        if (!name) {
-            showError('Vui lòng điền tên tất cả người chơi!');
-            return;
-        }
-        players.push(name);
+
+    if (players.length < 5) {
+        showError('Cần ít nhất 5 người chơi!');
+        return;
+    }
+
+    if (players.length > 13) {
+        showError('Không thể có quá 13 người chơi!');
+        return;
     }
 
     try {
@@ -70,7 +50,7 @@ async function startGame() {
             },
             body: JSON.stringify({ players, phase: gamePhase })
         });
-        
+
         const data = await response.json();
         sessionStorage.setItem('currentGameId', data.game_id);
         window.location.href = '/night';
@@ -79,3 +59,7 @@ async function startGame() {
     }
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const playerInput = document.getElementById('player-input');
+    playerInput.addEventListener('input', updatePlayerCount);
+});
